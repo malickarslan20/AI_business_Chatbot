@@ -9,7 +9,7 @@ from routers.invoice_router import router as invoice_router
 from routers.task_router import router as task_router
 # from routers.payment_router import router as payment_router
 from routers.chatbot_router import router as chatbot_router
-# from automation.scheduler import setup_scheduler
+from automation.scheduler import setup_scheduler, shutdown_scheduler
 
 
 @asynccontextmanager
@@ -17,9 +17,10 @@ async def lifespan(app: FastAPI):
     """Runs on startup and shutdown."""
     # startup
     print("Starting AI Business Assistant...")
-    # await setup_scheduler()  ← uncomment in Phase 6
+    await setup_scheduler()
     yield
     # shutdown
+    await shutdown_scheduler()
     print("Shutting down...")
 
 

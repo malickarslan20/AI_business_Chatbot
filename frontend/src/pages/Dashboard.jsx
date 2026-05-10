@@ -61,6 +61,9 @@ export default function Dashboard() {
             <div className="glass-card">
               <h3 className="card-heading">Quick Actions</h3>
               <div className="quick-actions">
+                <a href="/emails"   className="qa-item qa-item--indigo" style={{ background: 'linear-gradient(135deg, rgba(79,70,229,0.2), rgba(124,58,237,0.2))', color: '#a78bfa', borderColor: 'rgba(124,58,237,0.3)' }}>
+                  <Mail size={20}/> <span>Open Gmail</span>
+                </a>
                 <a href="/emails"   className="qa-item qa-item--blue">
                   <Mail size={20}/> <span>View Emails</span>
                 </a>

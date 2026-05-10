@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { Bot, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 
 export default function Login() {
-  const { signIn } = useAuth()
+  const { signIn, signInWithGoogle } = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -80,6 +80,21 @@ export default function Login() {
 
           <button type="submit" className="btn btn-primary btn-full" disabled={loading}>
             {loading ? <span className="btn-spinner" /> : 'Sign In'}
+          </button>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '8px 0' }}>
+            <div style={{ flex: 1, height: '1px', background: 'var(--border)' }}></div>
+            <span style={{ fontSize: '12px', color: 'var(--text3)' }}>OR</span>
+            <div style={{ flex: 1, height: '1px', background: 'var(--border)' }}></div>
+          </div>
+
+          <button 
+            type="button" 
+            onClick={() => signInWithGoogle()} 
+            className="btn btn-ghost btn-full"
+          >
+            <Mail size={18} />
+            Continue with Google
           </button>
         </form>
 
