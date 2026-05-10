@@ -11,12 +11,11 @@ export default function LandingNavbar() {
         <Bot size={28} className="sidebar-logo-icon" />
         <span>AI Business Assistant</span>
       </Link>
-      
+
       <div className="navbar-right">
         <Link to="/login" className="btn btn-ghost btn-sm">Login</Link>
-        <Link to="/signup" className="btn btn-ghost btn-sm">Sign Up</Link>
-        <button 
-          onClick={signInWithGoogle} 
+        <button
+          onClick={signInWithGoogle}
           className="btn btn-primary btn-sm"
         >
           <Mail size={16} />
