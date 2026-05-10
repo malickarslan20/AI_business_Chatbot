@@ -6,21 +6,34 @@ export default function LandingNavbar() {
   const { signInWithGoogle } = useAuth()
 
   return (
-    <nav className="navbar" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: 'rgba(8, 9, 15, 0.8)', backdropFilter: 'blur(12px)' }}>
-      <Link to="/" className="sidebar-logo" style={{ paddingBottom: 0 }}>
-        <Bot size={28} className="sidebar-logo-icon" />
-        <span>AI Business Assistant</span>
-      </Link>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-darkBg/80 backdrop-blur-lg border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-brand rounded-lg flex items-center justify-center shadow-lg shadow-purple/20 group-hover:scale-105 transition-transform">
+              <Bot size={20} className="text-white sm:w-6 sm:h-6" />
+            </div>
+            <span className="text-lg sm:text-xl font-bold tracking-tight text-textMain hidden xs:block">
+              AI Assistant
+            </span>
+          </Link>
 
-      <div className="navbar-right">
-        <Link to="/login" className="btn btn-ghost btn-sm">Login</Link>
-        <button
-          onClick={signInWithGoogle}
-          className="btn btn-primary btn-sm"
-        >
-          <Mail size={16} />
-          Continue with Google
-        </button>
+          <div className="flex items-center gap-3 sm:gap-6">
+            <Link 
+              to="/login" 
+              className="text-sm font-medium text-textSecondary hover:text-textMain transition-colors"
+            >
+              Login
+            </Link>
+            <button
+              onClick={signInWithGoogle}
+              className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-white text-darkBg rounded-full text-xs sm:text-sm font-semibold hover:bg-opacity-90 transition-all active:scale-95 shadow-lg shadow-white/10"
+            >
+              <Mail size={16} className="hidden sm:block" />
+              <span>Continue with Google</span>
+            </button>
+          </div>
+        </div>
       </div>
     </nav>
   )
