@@ -8,20 +8,35 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    // Check active sessions and sets the user
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      setUser(session?.user ?? null)
+      setLoading(false)
+    }
+
+    checkSession()
+
+    // Listen for changes on auth state (logged in, signed out, etc.)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
       setLoading(false)
     })
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-    })
-
-    return () => listener.subscription.unsubscribe()
+    return () => subscription.unsubscribe()
   }, [])
 
-  const signUp = (email, password) => supabase.auth.signUp({ email, password })
-  const signIn = (email, password) => supabase.auth.signInWithPassword({ email, password })
+  const signUp = async (email, password) => {
+    const res = await supabase.auth.signUp({ email, password })
+    if (res.data.user) setUser(res.data.user)
+    return res
+  }
+  
+  const signIn = async (email, password) => {
+    const res = await supabase.auth.signInWithPassword({ email, password })
+    if (res.data.user) setUser(res.data.user)
+    return res
+  }
   const signInWithGoogle = () => supabase.auth.signInWithOAuth({ 
     provider: 'google',
     options: {

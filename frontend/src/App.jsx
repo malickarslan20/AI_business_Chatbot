@@ -38,5 +38,5 @@ function AuthRoute() {
       <div className="w-10 h-10 border-4 border-brandPurple/20 border-t-brandPurple rounded-full animate-spin" />
     </div>
   )
-  return user ? <Dashboard /> : <Landing />
+  return user ? <ProtectedRoute><Dashboard /></ProtectedRoute> : <Landing />
 }
